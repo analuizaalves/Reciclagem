@@ -1,0 +1,126 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+      <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dicas de Reciclagem</title>
+        <link rel="stylesheet" href="{% static 'css/dicas.css'%}">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    </head>
+    <body>
+    <header>
+        <a href="{% url 'index' %}">
+            <img src="{% static 'images/logo.png' %}" alt="Logo" class="logo">
+        </a>
+        <nav>
+            <ul class="menu">
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'dicas' %}">Dicas de Reciclagem</a></li>
+                <li><a href="{% url 'parceiros' %}">Endereços de Coleta</a></li>
+                <li><a href="#">Sobre Nós</a></li>
+            </ul>
+        </nav>
+        <button class="hamburger" aria-label="Abrir menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="msg">
+            {% if user.is_authenticated %}
+            <p class="mensagem_login">Bem-vindo(a), {{ user.get_full_name|default:user.username }}!</p>
+            <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit">Sair</button>
+            </form>
+        {% else %}
+            <form action="{% url 'login' %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <input type="text" name="username" placeholder="Usuário" required>
+                <input type="password" name="password" placeholder="Senha" required>
+                <button type="submit">Entrar</button>
+            </form>
+        {% endif %}
+            
+        </div>
+    
+    
+        
+    </header>
+        <main>
+            <section class="intro">
+                <h1>Dicas de Reciclagem</h1>
+                <p>A reciclagem é uma prática essencial para a preservação do meio ambiente e a 
+                    redução do desperdício. Ao reaproveitar materiais como papel, plástico, vidro e metal, 
+                    contribuímos para diminuir a quantidade de resíduos que acabam nos aterros sanitários e
+                     na natureza. Além disso, a reciclagem economiza recursos naturais, reduz a emissão de gases 
+                     poluentes e contribui para um futuro mais sustentável. Nesta página, você encontrará dicas simples
+                     e eficazes para incorporar a reciclagem no seu dia a dia e fazer a diferença no planeta.
+                </p>
+            </section>
+            <section class="tips">
+                <div class="tip">
+                    <img src="{% static 'images/reciclagem_papel.jpg '%}" alt="reciclagem de papel">
+                    <h2>Reciclagem de Papel</h2>
+                    <p>Antes de reciclar, verifique se o papel está limpo e seco. Caixas de pizza, por exemplo, podem estar contaminadas com gordura, dificultando a reciclagem. Recicle papéis de escritório,
+                         jornais e revistas, e evite descartar papéis plastificados, 
+                         como embalagens de alimentos.
+                    </p>
+                </div>
+                <div class="tip">
+                    <img src="{% static 'images/reciclagem_plastico.jpg '%}" alt="reciclagem de plastico">
+                    <h2>Reciclagem de Plastico</h2>
+                    <p> Sempre lave as embalagens plásticas antes de descartá-las, removendo 
+                        resíduos de alimentos ou produtos químicos. Dê preferência a plásticos numerados de 1 a 7,
+                         pois são os mais fáceis de reciclar, e evite os plásticos de uso único sempre que possível.
+                    </p>
+                </div>
+                <div class="tip">
+                    <img src="{% static 'images/reciclagem_vidro.jpg '%}" alt="reciclagem de vidro">
+                    <h2>Reciclagem de Vidro</h2>
+                    <p>O vidro é 100% reciclável e pode ser reciclado infinitamente sem perda de qualidade.
+                         Certifique-se de separar os vidros por tipo, como garrafas e frascos, 
+                        e retire tampas ou tampinhas antes de encaminhá-los para a coleta seletiva.
+                    </p>
+                </div>
+                <div class="tip">
+                    <img src="{% static 'images/reciclagem_metal.jpg '%}" alt="reciclagem de metal">
+                    <h2>Reciclagem de Metal</h2>
+                    <p> Latas de alumínio e aço são amplamente recicláveis e podem ser reutilizadas diversas vezes. Lave as latas para remover
+                         resíduos e, sempre que possível, amasse-as para economizar espaço nos recipientes de coleta.
+                    </p>
+                </div>
+            </section>
+            <section class="call-to-action">
+                <p>"O ambiente é o que somos em nós mesmos. Nós e o ambiente somos dois
+                    processos diferentes; nós somos o ambiente e o ambientes somos nós."
+                </p>
+                <h5>Jiddu Krishanamurti</h5>
+            </section>
+
+        </main>
+        <footer>
+            <div class="social-icons">
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://wa.me" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+        </footer>
+        <script>
+
+            document.addEventListener("DOMContentLoaded",function () {
+            const hamburger = document.querySelector(".hamburger");
+            const menu = document.querySelector(".menu");
+            hamburger.addEventListener("click", function ()
+            {menu.classList.toggle("show");});
+            });
+        </script>      
+    </body>
+               
+</html>        
